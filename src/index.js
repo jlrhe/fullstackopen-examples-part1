@@ -37,7 +37,7 @@ const CounterSeconds = (props) => {
   return (
   <>
   <div>You have been on this page {counter} seconds.</div>
-  <button onClick={stopStartCounter}>Start/Stop counter</button>
+  <button onClick={stopStartCounter}>Stop/Start counter</button>
   </>
   )
 }
