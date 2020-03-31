@@ -1,3 +1,5 @@
+Examples from fullstackopen.com course material (some heavily modified)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
