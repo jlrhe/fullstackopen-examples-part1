@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 
 const Hello = ({ description, name, age }) => { //made sure the order doesn't matter when destructuring
 
-  console.log(name)
-  console.log(description)
-  console.log(age)
+  console.log("rendered hello")
 
   const bornYear = () => {
     const yearNow = new Date().getFullYear()
@@ -22,37 +20,52 @@ const Hello = ({ description, name, age }) => { //made sure the order doesn't ma
   )
 }
 
-const CounterSeconds = (props) => {
-  const [counter, incrementCounter] = useState(0)
-  const [counterOn, toggleCounterOn] = useState(true)
+const Timer = () => {
 
-  if(counterOn) {
-    setTimeout( () => incrementCounter(counter + 1), 1000)
-  }
-  
-  const stopStartCounter = () => {
-    toggleCounterOn(!counterOn)
-  }
+  console.log("rendered timer")
+
+  const [counterOn, toggleCounterState] = useState(true)
+  const toggleCounter = () => toggleCounterState(!counterOn)
 
   return (
-  <>
-  <div>You have been on this page {counter} seconds.</div>
-  <button onClick={stopStartCounter}>Stop/Start counter</button>
-  </>
+    <>
+    <DisplayCounter counterOn={counterOn} />
+    <Button handleClick={toggleCounter} text="Stop/Start counter" />
+    </>
   )
 }
 
+const DisplayCounter = ({counterOn}) => {
+
+  console.log("rendered Counter")
+  
+  const [counter, incrementCounter] = useState(0)
+  const incrementCounterByOne = () => incrementCounter(counter + 1)
+
+  if(counterOn) {
+    setTimeout(incrementCounterByOne, 1000)
+  }
+
+  return (
+    <div>You have been on this page {counter} seconds.</div>
+  )
+}
+
+const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</button>
+
+const DateString = () => <div>{new Date().toDateString()}</div>
+  
 const App = () => {
-  const now = new Date()
-  const wife = "beautiful"
+
+  console.log("rendered App")
   
   return (
     <div>
       <Hello name="Janne" description="a genius" age={38} />
       <Hello name="Sampo" description="the best" age={3} />
-      <Hello name="Minna" description={wife.toUpperCase()} age="secret" />
-      <p>It's {now.toDateString()}</p>
-      <CounterSeconds />
+      <Hello name="Minna" description={"beautiful".toUpperCase()} age="secret" />
+      <DateString />
+      <Timer />
     </div>
   )
 }
